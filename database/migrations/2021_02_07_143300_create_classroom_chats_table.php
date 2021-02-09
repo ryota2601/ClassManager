@@ -20,6 +20,16 @@ class CreateClassroomChatsTable extends Migration
             $table->text('text');
             $table->char('file', 255);
             $table->timestamps();
+
+            $table->foreign('class_room_id')
+                    ->references('id')
+                    ->on('classrooms')
+                    ->onDelete('cascade');
+                    
+            $table->foreign('user_id')
+                    ->references('id')
+                    ->on('users')
+                    ->onDelete('cascade');
         });
     }
 

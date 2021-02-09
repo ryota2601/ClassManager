@@ -15,10 +15,16 @@ class CreatePeriodsTable extends Migration
     {
         Schema::create('periods', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('university_id');
             $table->text('name');
             $table->dateTime('start_time');
             $table->dateTime('end_time');
             $table->timestamps();
+
+            $table->foreign('university_id')
+                    ->references('id')
+                    ->on('universities')
+                    ->onDelete('cascade');
         });
     }
 

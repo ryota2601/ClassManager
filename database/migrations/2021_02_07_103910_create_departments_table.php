@@ -18,6 +18,11 @@ class CreateDepartmentsTable extends Migration
             $table->integer('university_id');
             $table->text('name');
             $table->timestamps();
+
+            $table->foreign('university_id')
+                    ->references('id')
+                    ->on('universities')
+                    ->onDelete('cascade');
         });
     }
 
