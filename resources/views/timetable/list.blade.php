@@ -45,7 +45,7 @@
     </div>
     <div class="row">
         <div class="mt-5 text-right">
-            <a class="btn btn-dark" href="/class_room" role="button">時間割の追加</a>
+            <a class="btn btn-dark" href="/addForm" role="button">時間割の追加</a>
         </div>
     </div>
 </div>
