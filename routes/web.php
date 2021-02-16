@@ -16,7 +16,7 @@ Route::post('/logout', 'UserController@logout')->name('logout');
 Route::get('/register', 'UserController@register')->name('register');
 Route::get('/forget', 'UserController@forget')->name('forget');
 Route::get('/', 'ToppageController@showTimetable')->name('top_page');
-Route::post('/class_room', 'ClassroomController@addClass')->name('class_room_add');
+Route::get('/class_room', 'ClassroomController@addClass')->name('class_room_add');
 Route::get('/class_room/{ID}', 'ClassroomController@showInformation')->name('class_room_information');
 Route::get('/class_room/{ID}', 'ClassroomController@deleteClass')->name('class_room_delete');
 Route::get('/class_room/{ID}', 'ClassroomController@updateInformation')->name('class_room_update');
