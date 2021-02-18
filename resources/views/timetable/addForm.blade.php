@@ -10,7 +10,8 @@
 <body>
     <div class="container">
         <div class="row">
-            <form action="/" method="get">
+            <form action="/" method="post">
+                @csrf
             <div class="mb-3">
                 <label class="form-label">授業名</label>
                 <input type="text" class="form-control" name="name">
@@ -44,7 +45,7 @@
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">決定</button>
-            </form>       
+            </form>
         </div>
     </div>
 </body>

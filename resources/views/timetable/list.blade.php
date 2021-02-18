@@ -9,7 +9,7 @@
     <title>timetable</title>
 </head>
 <body>
-
+{{$lessons}}
 <div class="container">
     <div class="row">
         <div class="mt-3"><h1 class="text-center" id="h1">時間割</h1></div>
@@ -30,7 +30,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php 
+            <?php
                 for($i=1; $i<10; $i++){
                     echo '<tr><th scope="row">' , $i , '</th>';
                     for($j=0; $j<7; $j++){
