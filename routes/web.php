@@ -19,8 +19,8 @@ Route::get('/', 'ToppageController@showTimetable')->name('top_page');
 
 
 
-Route::get('/addForm', 'ToppageController@≈')->name('top_page_add_form');
-Route::post('/', 'ToppageController@≈')->name('top_page_register_form');
+Route::get('/addForm', 'ToppageController@addForm')->name('top_page_add_form');
+Route::post('/', 'ToppageController@registerForm')->name('top_page_register_form');
 
 
 Route::get('/exeAdd', 'ToppageController@exeAdd')->name('top_page_exe_add');
