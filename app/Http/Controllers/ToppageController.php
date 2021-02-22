@@ -5,15 +5,23 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Lesson;
+use Illuminate\Support\Facades\Auth;
 
 class ToppageController extends Controller
 {
     //
     public function showTimetable()
     {
-        $lessons=Lesson::all();
+        $lessons=Lesson::where('user_id', Auth::id())->get();
 
-        return view('timetable.list',array("lessons"=>$lessons));
+        $lessonArray=array();
+
+        foreach($lessons as $lesson){
+            $lessonArray[$lesson->day_id - 1][$lesson->time_id - 1] = $lesson;
+        }
+
+
+        return view('timetable.list',array("lessons"=>$lessonArray));
     }
 
     public function addForm()
@@ -30,6 +38,7 @@ class ToppageController extends Controller
         $lesson = new Lesson();
         $lesson->university_id=1;
         $lesson->department_id=1;
+        $lesson->user_id=Auth::id();
         $lesson->name=$name;
         $lesson->day_id=$day;
         $lesson->time_id=$time;

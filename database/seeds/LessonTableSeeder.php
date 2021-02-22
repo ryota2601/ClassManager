@@ -16,6 +16,7 @@ class LessonTableSeeder extends Seeder
             "id"=>1,
             "university_id"=>1,
             "department_id"=>1,
+            "user_id"=>1,
             "name"=>"農学概論",
             "start_time"=>'2020-01-01',
             'end_time'=>'2021-08-01',

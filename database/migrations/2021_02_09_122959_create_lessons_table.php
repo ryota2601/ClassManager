@@ -17,6 +17,7 @@ class CreateLessonsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('university_id');
             $table->integer('department_id');
+            $table->integer('user_id');
             $table->text('name');
             $table->dateTime('start_time');
             $table->dateTime('end_time');
@@ -32,6 +33,11 @@ class CreateLessonsTable extends Migration
             $table->foreign('department_id')
                     ->references('id')
                     ->on('departments')
+                    ->onDelete('cascade');
+
+            $table->foreign('user_id')
+                    ->references('id')
+                    ->on('users')
                     ->onDelete('cascade');
         });
     }
