@@ -17,8 +17,9 @@ class ToppageController extends Controller
         $lessonArray=array();
 
         foreach($lessons as $lesson){
-            $lessonArray[$lesson->day_id - 1][$lesson->time_id - 1] = $lesson;
+            $lessonArray[$lesson->day_id][$lesson->time_id] = $lesson;
         }
+
 
         return view('timetable.list',array("lessons"=>$lessonArray));
     }

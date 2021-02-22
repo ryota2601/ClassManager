@@ -11,7 +11,7 @@
         a.cell{
             display:block;
             padding: 1.2em 1.2em; 
-            position: absolute;  
+            position: absolute; 
             top:0px;
             right:0px;
             left:0px;
@@ -20,12 +20,6 @@
     </style>
 </head>
 <body>
-@foreach($lessons as $day_lessons)
-    @foreach($day_lessons as $day_lesson)
-    {{$day_lesson->name}}
-    {{$day_lesson->time_id}}
-    @endforeach
-@endforeach
 
 <div class="container">
     <div class="row">
@@ -50,7 +44,10 @@
                 for($i=1; $i<10; $i++){
                     echo '<tr><th scope="row">' , $i , '</th>';
                     for($j=0; $j<7; $j++){
-                        echo '<td><a class="cell" data-toggle="modal" data-target="#exampleModal" data-day="' . $j . '" data-time="' . $i . '"></a><a class="content">線形代数</a></td>';
+                        echo '<td><a class="cell" data-toggle="modal" data-target="#exampleModal" data-day="' . $j . '" data-time="' . $i . '"></a>';
+                        if(isset($lessons[$j][$i])){
+                            echo '<a class="content">' . $lessons[$j][$i]->name . '</a></td>';
+                        }
                     }
                     echo '</tr>';
                 }
