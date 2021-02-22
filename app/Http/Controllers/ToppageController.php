@@ -20,7 +20,6 @@ class ToppageController extends Controller
             $lessonArray[$lesson->day_id - 1][$lesson->time_id - 1] = $lesson;
         }
 
-
         return view('timetable.list',array("lessons"=>$lessonArray));
     }
 
