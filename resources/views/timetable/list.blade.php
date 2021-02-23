@@ -23,7 +23,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="mt-3"><h1 class="text-center" id="h1">時間割</h1></div>
+        <div class="mt-3 mr-auto ml-auto mb-3"><h1 id="h1">時間割</h1></div>
     </div>
     <div class="row">
         <table class="table table-bordered">
@@ -44,10 +44,13 @@
                 for($i=1; $i<10; $i++){
                     echo '<tr><th scope="row">' , $i , '</th>';
                     for($j=0; $j<7; $j++){
-                        echo '<td><a class="cell" data-toggle="modal" data-target="#exampleModal" data-day="' . $j . '" data-time="' . $i . '"></a>';
+                        echo '<td class="cell" data-toggle="modal" data-target="#exampleModal" data-day="' . $j . '" data-time="' . $i . '">';
                         if(isset($lessons[$j][$i])){
-                            echo '<a class="content"　href="">' . $lessons[$j][$i]->name . '</a></td>';
+                            echo '<a class="content"　href="">' . $lessons[$j][$i]->name . '</a>';
+                        }else {
+                            echo '<a class="cell" data-toggle="modal" data-target="#exampleModal" data-day="' . $j . '" data-time="' . $i . '"></a>';
                         }
+                        echo '</td>';
                     }
                     echo '</tr>';
                 }
@@ -103,6 +106,7 @@
             </div>
         </div>
         <div class="modal-footer">
+            <a href="" class="btn btn-danger" id="delete">削除</a>
             <button type="submit" class="btn btn-primary">決定</button>
         </div>
         </form>
@@ -116,8 +120,8 @@
 
 <script type="text/javascript">
     $('#exampleModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) //モーダルを呼び出すときに使われたボタンを取得
-    var day_raw = button.data('day') //data-whatever の値を取得
+    var button = $(event.relatedTarget) 
+    var day_raw = button.data('day') 
     if(day_raw + 1 >6){
         var day = 0;
     }else {
@@ -128,6 +132,8 @@
 
     document.getElementById('day').options[day_raw].selected = true;
     document.getElementById('time').options[time - 1].selected = true;
+
+    document.getElementById('delete').href = '/delete/' + day_raw + '/' + time;
     })
 </script>
 

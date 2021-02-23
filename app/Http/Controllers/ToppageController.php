@@ -31,11 +31,10 @@ class ToppageController extends Controller
 
     public function registerForm(Request $request)
     {
-
         $time=$request->request->get("time");
         $name=$request->request->get("name");
         $day=$request->request->get("day");
-        $lesson = new Lesson();
+        $lesson = Lesson::firstOrNew(["user_id"=>Auth::id(), "time_id"=>$time,  "day_id"=>$day]);
         $lesson->university_id=1;
         $lesson->department_id=1;
         $lesson->user_id=Auth::id();
@@ -46,6 +45,13 @@ class ToppageController extends Controller
         $lesson->end_time=new Carbon('2021-07-31');
         $lesson->save();
         \Session::flash('eer_msg', '授業を登録しました');
+        return redirect()->route("top_page");
+    }
+
+    public function lessonDelete($day_id, $time_id)
+    {
+        $lesson = Lesson::where(["user_id"=>Auth::id(), "time_id"=>$time_id,  "day_id"=>$day_id])->first();
+        $lesson->delete();
         return redirect()->route("top_page");
     }
 }
