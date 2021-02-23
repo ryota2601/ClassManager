@@ -46,7 +46,7 @@
                     for($j=0; $j<7; $j++){
                         echo '<td><a class="cell" data-toggle="modal" data-target="#exampleModal" data-day="' . $j . '" data-time="' . $i . '"></a>';
                         if(isset($lessons[$j][$i])){
-                            echo '<a class="content">' . $lessons[$j][$i]->name . '</a></td>';
+                            echo '<a class="content"　href="/class_room/{ID}/chat_room/{date}">' . $lessons[$j][$i]->name . '</a></td>';
                         }
                     }
                     echo '</tr>';
@@ -71,8 +71,7 @@
         <div class="modal-body">
             <div class="mb-3">
                 <label class="form-label">曜日</label><br>
-                <select class="form-select" name="day">
-                    <option selected>曜日を選んでください</option>
+                <select class="form-select" id="day">
                     <option value="0">月</option>
                     <option value="1">火</option>
                     <option value="2">水</option>
@@ -81,11 +80,11 @@
                     <option value="5">土</option>
                     <option value="6">日</option>
                 </select>
+                曜日
             </div>
             <div class="mb-3">
                 <label class="form-label">時限</label><br>
-                <select class="form-select" name="time">
-                    <option selected>時限を選んでください</option>
+                <select class="form-select" id="time">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -96,6 +95,7 @@
                     <option value="8">8</option>
                     <option value="9">9</option>
                 </select>
+                限
             </div>
             <div class="mb-3">
                 <label class="form-label">授業名</label>
@@ -117,11 +117,17 @@
 <script type="text/javascript">
     $('#exampleModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) //モーダルを呼び出すときに使われたボタンを取得
-    var day = button.data('day') //data-whatever の値を取得
-    var time = button.data('time')
+    var day_raw = button.data('day') //data-whatever の値を取得
+    if(day_raw + 1 >6){
+        var day = 0;
+    }else {
+        var day = day_raw + 1;
+    }
+    var dayOfWeekStr = [ "日", "月", "火", "水", "木", "金", "土" ][day] ;
+    var time = button.data('time');
 
-    var modal = $(this)  //モーダルを取得
-    modal.find('.modal-title').text(day + '曜日'　+ time + '限　に授業を追加する'　) //モーダルのタイトルに値を表示
+    document.getElementById('day').options[day_raw].selected = true;
+    document.getElementById('time').options[time - 1].selected = true;
     })
 </script>
 
