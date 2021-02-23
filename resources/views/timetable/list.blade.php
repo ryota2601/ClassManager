@@ -46,7 +46,7 @@
                     for($j=0; $j<7; $j++){
                         echo '<td><a class="cell" data-toggle="modal" data-target="#exampleModal" data-day="' . $j . '" data-time="' . $i . '"></a>';
                         if(isset($lessons[$j][$i])){
-                            echo '<a class="content"　href="/class_room/{ID}/chat_room/{date}">' . $lessons[$j][$i]->name . '</a></td>';
+                            echo '<a class="content"　href="">' . $lessons[$j][$i]->name . '</a></td>';
                         }
                     }
                     echo '</tr>';
@@ -71,7 +71,7 @@
         <div class="modal-body">
             <div class="mb-3">
                 <label class="form-label">曜日</label><br>
-                <select class="form-select" id="day">
+                <select class="form-select" id="day" name="day">
                     <option value="0">月</option>
                     <option value="1">火</option>
                     <option value="2">水</option>
@@ -84,7 +84,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">時限</label><br>
-                <select class="form-select" id="time">
+                <select class="form-select" id="time" name="time">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
