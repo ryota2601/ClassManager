@@ -44,13 +44,11 @@
                 for($i=1; $i<10; $i++){
                     echo '<tr><th scope="row">' , $i , '</th>';
                     for($j=0; $j<7; $j++){
-                        echo '<td class="cell" data-toggle="modal" data-target="#exampleModal" data-day="' . $j . '" data-time="' . $i . '">';
                         if(isset($lessons[$j][$i])){
-                            echo '<a class="content"　href="">' . $lessons[$j][$i]->name . '</a>';
+                            echo '<td class="cell"><a class="content">' . $lessons[$j][$i]->name . '</a></td>';
                         }else {
-                            echo '<a class="cell" data-toggle="modal" data-target="#exampleModal" data-day="' . $j . '" data-time="' . $i . '"></a>';
+                            echo '<td class="cell" data-toggle="modal" data-target="#exampleModal" data-day="' . $j . '" data-time="' . $i . '"><a data-day="' . $j . '" data-time="' . $i . '"></a></td>';
                         }
-                        echo '</td>';
                     }
                     echo '</tr>';
                 }
@@ -112,6 +110,32 @@
         </form>
         </div>
     </div>
+</div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
