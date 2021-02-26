@@ -47,7 +47,7 @@
                         if(isset($lessons[$j][$i])){
                             echo '<td class="cell"><a class="content">' . $lessons[$j][$i]->name . '</a></td>';
                         }else {
-                            echo '<td class="cell" data-toggle="modal" data-target="#exampleModal" data-day="' . $j . '" data-time="' . $i . '"><a data-day="' . $j . '" data-time="' . $i . '"></a></td>';
+                            echo '<td class="cell" data-toggle="modal" data-target="#formModal" data-day="' . $j . '" data-time="' . $i . '"><a data-day="' . $j . '" data-time="' . $i . '"></a></td>';
                         }
                     }
                     echo '</tr>';
@@ -58,13 +58,13 @@
     </div>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
         <form action="/" method="post">
             @csrf
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">授業を追加</h5>
+            <h5 class="modal-title" id="formModalLabel">授業を追加</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -112,11 +112,6 @@
     </div>
 </div>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Launch demo modal
-</button>
-
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -143,7 +138,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
-    $('#exampleModal').on('show.bs.modal', function (event) {
+    $('#formModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget) 
     var day_raw = button.data('day') 
     if(day_raw + 1 >6){
