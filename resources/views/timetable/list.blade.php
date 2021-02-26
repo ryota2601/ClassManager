@@ -8,15 +8,6 @@
         td{
             position:relative;
         }
-        a.cell{
-            display:block;
-            padding: 1.2em 1.2em; 
-            position: absolute; 
-            top:0px;
-            right:0px;
-            left:0px;
-            bottom:0px;
-        }
     </style>
 </head>
 <body>
@@ -45,9 +36,9 @@
                     echo '<tr><th scope="row">' , $i , '</th>';
                     for($j=0; $j<7; $j++){
                         if(isset($lessons[$j][$i])){
-                            echo '<td class="cell"><a class="content">' . $lessons[$j][$i]->name . '</a></td>';
+                            echo '<td class="cell" data-toggle="modal" data-target="#informationModal" data-day="' . $j . '" data-time="' . $i . '">' . $lessons[$j][$i]->name . '</td>';
                         }else {
-                            echo '<td class="cell" data-toggle="modal" data-target="#formModal" data-day="' . $j . '" data-time="' . $i . '"><a data-day="' . $j . '" data-time="' . $i . '"></a></td>';
+                            echo '<td class="cell" data-toggle="modal" data-target="#formModal" data-day="' . $j . '" data-time="' . $i . '"></td>';
                         }
                     }
                     echo '</tr>';
@@ -104,7 +95,6 @@
             </div>
         </div>
         <div class="modal-footer">
-            <a href="" class="btn btn-danger" id="delete">削除</a>
             <button type="submit" class="btn btn-primary">決定</button>
         </div>
         </form>
@@ -113,11 +103,11 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="informationModal" tabindex="-1" role="dialog" aria-labelledby="informationModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="informationModalLabel">授業詳細</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -126,8 +116,7 @@
         ...
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <a href="" class="btn btn-danger" id="delete">削除</a>
       </div>
     </div>
   </div>
@@ -139,21 +128,29 @@
 
 <script type="text/javascript">
     $('#formModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) 
-    var day_raw = button.data('day') 
+    var button = $(event.relatedTarget);  
+    var day_raw = button.data('day');
     if(day_raw + 1 >6){
         var day = 0;
     }else {
         var day = day_raw + 1;
     }
-    var dayOfWeekStr = [ "日", "月", "火", "水", "木", "金", "土" ][day] ;
+    var dayOfWeekStr = [ "日", "月", "火", "水", "木", "金", "土" ][day];
     var time = button.data('time');
 
     document.getElementById('day').options[day_raw].selected = true;
     document.getElementById('time').options[time - 1].selected = true;
+    })
+
+    $('#informationModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var day_raw = button.data('day');
+    var time = button.data('time');
+    console.log(day_raw);
 
     document.getElementById('delete').href = '/delete/' + day_raw + '/' + time;
     })
+
 </script>
 
 </body>
