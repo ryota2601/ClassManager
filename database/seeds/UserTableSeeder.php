@@ -17,8 +17,8 @@ class UserTableSeeder extends Seeder
             "name"=>"松本僚太",
             "university_id"=>1,
             "department_id"=>1,
-            "email"=>'test@test.com',
-            "password"=>'testtest',
+            "email"=>'t@t.com',
+            "password"=>bcrypt('00000000'),
         ];
 
         User::create($dataset);
