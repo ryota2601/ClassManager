@@ -11,18 +11,26 @@
 |
 */
 
-Route::get('/login', 'UserController@login')->name('login');
-Route::post('/logout', 'UserController@logout')->name('logout');
-Route::get('/register', 'UserController@register')->name('register');
-Route::get('/forget', 'UserController@forget')->name('forget');
-Route::get('/', 'ToppageController@showTimetable')->name('top_page');
+
+Route::get('/home', 'ToppageController@showTimetable')->name('home');
+Route::get('/', 'HomeController@index')->name('top_page');
+Route::post('/', 'ToppageController@registerLesson')->name('top_page_register_lesson');
+Route::post('/addTask/{lesson_id}', 'ToppageController@registerTask')->name('top_page_register_task');
+Route::get('/delete/{day_id}/{time_id}', 'ToppageController@lessonDelete')->name('lesson_delete');
+
+Auth::routes();
+
+
+Route::get('/chat_room/{lesson_id}', 'ToppageController@chat_room')->name('chat_room');
+
+
+
+
+
 
 
 
 Route::get('/addForm', 'ToppageController@addForm')->name('top_page_add_form');
-Route::post('/', 'ToppageController@registerLesson')->name('top_page_register_lesson');
-Route::post('/addTask/{lesson_id}', 'ToppageController@registerTask')->name('top_page_register_task');
-Route::get('/delete/{day_id}/{time_id}', 'ToppageController@lessonDelete')->name('lesson_delete');
 
 Route::get('/exeAdd', 'ToppageController@exeAdd')->name('top_page_exe_add');
 Route::get('/class_room/{ID}', 'ClassroomController@showInformation')->name('class_room_information');
@@ -31,16 +39,5 @@ Route::get('/class_room/{ID}', 'ClassroomController@updateInformation')->name('c
 Route::get('/class_room/{ID}/chat_room/{date}', 'ChatroomController@register')->name('chat_room_register');
 Route::get('/class_room/{ID}/chat_room/{date}', 'ChatroomController@forget')->name('chat_room_forget');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

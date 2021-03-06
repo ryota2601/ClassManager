@@ -1,18 +1,15 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">    <title>timetable</title>
-    <style>
-        td{
-            position:relative;
+@extends('layouts.app')
+
+@section('css')
+    <style type="text/css">
+        .mycontent{
+            background-color: white;
         }
     </style>
-</head>
-<body>
+@endsection
 
-<div class="container">
+@section('content')
+<div class="container mycontent">
     <div class="row">
         <div class="mt-3 mr-auto ml-auto mb-3"><h1 id="h1">時間割</h1></div>
     </div>
@@ -144,7 +141,7 @@
             </div>
             <div class="form-group">
                 <label class="mb-2">提出期限</label><br>
-                <input type="date" id="deadline" name="deadline">           
+                <input type="date" id="deadline" name="deadline">
             </div>
       </div>
       <div class="modal-footer">
@@ -154,15 +151,13 @@
     </div>
   </div>
 </div>
+@endsection
 
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-
+@section('javascript')
 <script type="text/javascript">
     $('#formModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget);  
+    var button = $(event.relatedTarget);
     var day_raw = button.data('day');
     if(day_raw + 1 >6){
         var day = 0;
@@ -215,6 +210,4 @@
         $('#detailModal').modal('hide');
     })
 </script>
-
-</body>
-</html>
+@endsection
