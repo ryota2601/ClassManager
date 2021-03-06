@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ChatRoom;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Lesson;
@@ -10,6 +11,13 @@ use Illuminate\Support\Facades\Auth;
 
 class ToppageController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     //
     public function showTimetable()
     {
@@ -69,4 +77,12 @@ class ToppageController extends Controller
         $lesson->delete();
         return redirect()->route("top_page");
     }
+
+    public function chat_room($lesson_id){
+
+        $Chats=ChatRoom::where('lesson_id',$lesson_id)->orderBy('created_date', 'asc')->get();
+
+        return view('chatroom/index',compact($Chats));
+    }
+
 }
