@@ -36,7 +36,7 @@
                     echo '<tr><th scope="row">' , $i , '</th>';
                     for($j=0; $j<7; $j++){
                         if(isset($lessons[$j][$i])){
-                            echo '<td class="cell" data-toggle="modal" data-target="#informationModal" data-day="' . $j . '" data-time="' . $i . '">' . $lessons[$j][$i]->name . '</td>';
+                            echo '<td class="cell" data-toggle="modal" data-target="#detailModal" data-day="' . $j . '" data-time="' . $i . '" data-lesson="' . $lessons[$j][$i]->id . '" data-name="' . $lessons[$j][$i]->name . '">' . $lessons[$j][$i]->name . '</td>';
                         }else {
                             echo '<td class="cell" data-toggle="modal" data-target="#formModal" data-day="' . $j . '" data-time="' . $i . '"></td>';
                         }
@@ -103,23 +103,18 @@
     </div>
 </div>
 
-<!-- informationModal -->
-<div class="modal fade" id="informationModal" tabindex="-1" role="dialog" aria-labelledby="informationModalLabel" aria-hidden="true">
+<!-- detailModal -->
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="informationModalLabel">課題一覧</h5>
+        <h5 class="modal-title" id="detailModalLabel"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <ul class="list-group">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
+        <ul class="list-group" id="list-group">
         </ul>
       </div>
       <div class="modal-footer">
@@ -130,37 +125,32 @@
   </div>
 </div>
 
-<!-- tasknModal -->
-<div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="tasknModalLabel" aria-hidden="true">
+<!-- taskModal -->
+<div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="taskModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="informationModalLabel">課題追加</h5>
+        <h5 class="modal-title" id="taskModalLabel"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <form　action="" method="post">
       <div class="modal-body">
-        <form>
+            <input type="hidden" value="" name="" id="input_lesson_id">
             <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <label for="exampleFormControlTextarea1">課題内容</label>
+                <textarea class="form-control" id="task" name="task" rows="1"></textarea>
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <label class="mb-2">提出期限</label><br>
+                <input type="date" id="deadline" name="deadline">           
             </div>
-            <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
       </div>
       <div class="modal-footer">
-        <div><a href="" class="btn btn-danger" id="delete">削除</a></div>
+        <button type="submit" class="btn btn-primary">追加</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
@@ -186,15 +176,44 @@
     document.getElementById('time').options[time - 1].selected = true;
     })
 
-    $('#informationModal').on('show.bs.modal', function (event) {
+    $('#detailModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
     var day_raw = button.data('day');
     var time = button.data('time');
-    console.log(day_raw);
+    var lesson_id = button.data('lesson');
+    var name = button.data('name');
+    var tasks = {
+    <?php
+    foreach($tasks as $key=>$task){
+        echo $key . ':[' ;
+        foreach($task as $element){
+          echo  '["' . $element[0] . '","' . $element[1] . '"],';
+        }
+        echo '],';
+    }
+    ?>
+    }
+
+    var task_html = "";
+    console.log(tasks[3]);
+    if(typeof tasks[lesson_id] === 'undefined'){
+    }else{
+        console.log(lesson_id);
+        tasks[lesson_id].forEach((data)=>{
+            task_html = task_html + '<li class="list-group-item"><div class="row"><div class="col-8">' + data[0] + '</div><div class="col-4">' + data[1] + '</div></div></li>';
+        })
+    }
 
     document.getElementById('delete').href = '/delete/' + day_raw + '/' + time;
+    document.getElementById('list-group').innerHTML = task_html;
+    document.getElementById('input_lesson_id').value = lesson_id;
+    document.getElementById('detailModalLabel').innerHTML = name;
+    document.getElementById('taskModalLabel').innerHTML = name + 'の課題を追加する';
     })
 
+    $('#taskModal').on('show.bs.modal', function (event) {
+        $('#detailModal').modal('hide');
+    })
 </script>
 
 </body>

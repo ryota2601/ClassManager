@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Lesson;
+use App\Models\Classroom;
 use Illuminate\Support\Facades\Auth;
 
 class ToppageController extends Controller
@@ -12,16 +13,24 @@ class ToppageController extends Controller
     //
     public function showTimetable()
     {
-        $lessons=Lesson::where('user_id', Auth::id())->get();
+        $lessons_=Lesson::where('user_id', Auth::id())->get();
 
-        $lessonArray=array();
+        $lessons=array();
 
-        foreach($lessons as $lesson){
-            $lessonArray[$lesson->day_id][$lesson->time_id] = $lesson;
+        foreach($lessons_ as $lesson){
+            $lessons[$lesson->day_id][$lesson->time_id] = $lesson;
         }
 
+        $details_ = Classroom::where('user_id', Auth::id())->get();
+        $tasks=array();
+        $deadlines=array();
 
-        return view('timetable.list',array("lessons"=>$lessonArray));
+        foreach($details_ as $detail){
+            $tasks[$detail->lesson_id][$detail->id] = [$detail->task, $detail->deadline];
+            $deadlines[$detail->lesson_id][$detail->id] = $detail->deadline;
+        }
+
+        return view('timetable.list', compact('lessons', 'tasks', 'deadlines'));
     }
 
     public function addForm()
@@ -29,7 +38,7 @@ class ToppageController extends Controller
         return view('timetable.addForm');
     }
 
-    public function registerForm(Request $request)
+    public function registerLesson(Request $request)
     {
         $time=$request->request->get("time");
         $name=$request->request->get("name");
@@ -44,8 +53,14 @@ class ToppageController extends Controller
         $lesson->start_time=new Carbon('2021-04-01');
         $lesson->end_time=new Carbon('2021-07-31');
         $lesson->save();
-        \Session::flash('eer_msg', '授業を登録しました');
         return redirect()->route("top_page");
+    }
+
+    public function resisterTask(Request $request)
+    {
+        $task=$request->request->get("task");
+        $deadline=$request->request->get("deadline");
+        $classroom = Classroom::firstOrNew(["user_id"=>Auth::id()]);
     }
 
     public function lessonDelete($day_id, $time_id)

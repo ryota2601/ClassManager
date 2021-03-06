@@ -20,9 +20,9 @@ Route::get('/', 'ToppageController@showTimetable')->name('top_page');
 
 
 Route::get('/addForm', 'ToppageController@addForm')->name('top_page_add_form');
-Route::post('/', 'ToppageController@registerForm')->name('top_page_register_form');
+Route::post('/', 'ToppageController@registerLesson')->name('top_page_register_lesson');
+Route::post('/addTask/{lesson_id}', 'ToppageController@registerTask')->name('top_page_register_task');
 Route::get('/delete/{day_id}/{time_id}', 'ToppageController@lessonDelete')->name('lesson_delete');
-
 
 Route::get('/exeAdd', 'ToppageController@exeAdd')->name('top_page_exe_add');
 Route::get('/class_room/{ID}', 'ClassroomController@showInformation')->name('class_room_information');

@@ -12,18 +12,33 @@ class LessonTableSeeder extends Seeder
      */
     public function run()
     {
-        $dataset =[
-            "id"=>1,
-            "university_id"=>1,
-            "department_id"=>1,
-            "user_id"=>1,
-            "name"=>"農学概論",
-            "start_time"=>'2020-01-01',
-            'end_time'=>'2021-08-01',
-            'day_id'=>1,
-            'time_id'=>1
+        $dataSet =[
+            [
+                "id"=>1,
+                "university_id"=>1,
+                "department_id"=>1,
+                "user_id"=>1,
+                "name"=>"農学概論",
+                "start_time"=>'2020-01-01',
+                'end_time'=>'2021-08-01',
+                'day_id'=>1,
+                'time_id'=>1,
+            ],
+            [
+                "id"=>2,
+                "university_id"=>1,
+                "department_id"=>1,
+                "user_id"=>1,
+                "name"=>"English",
+                "start_time"=>'2020-01-01',
+                'end_time'=>'2021-08-01',
+                'day_id'=>4,
+                'time_id'=>5,
+            ],
         ];
 
-        Lesson::create($dataset);
+        foreach ($dataSet as $data) {
+            Lesson::create($data);
+        }
     }
 }
