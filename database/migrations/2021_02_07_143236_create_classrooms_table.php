@@ -16,13 +16,18 @@ class CreateClassroomsTable extends Migration
         Schema::create('classrooms', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('lesson_id');
-            $table->dateTime('date');
+            $table->dateTime('deadline');
+            $table->integer('user_id');
             $table->text('task');
             $table->timestamps();
 
             $table->foreign('lesson_id')
                     ->references('id')
                     ->on('lessons')
+                    ->onDelete('cascade');
+            $table->foreign('user_id')
+                    ->references('id')
+                    ->on('users')
                     ->onDelete('cascade');
         });
     }
