@@ -31,8 +31,7 @@ class ToppageController extends Controller
         $deadlines=array();
 
         foreach($details_ as $detail){
-            $tasks[$detail->lesson_id][$detail->id] = [$detail->task, $detail->deadline];
-            $deadlines[$detail->lesson_id][$detail->id] = $detail->deadline;
+            $tasks[$detail->lesson_id][$detail->id] = [$detail->task, $detail->deadline, $detail->id];
         }
 
         return view('timetable.list', compact('lessons', 'tasks', 'deadlines'));
@@ -72,6 +71,13 @@ class ToppageController extends Controller
         $classroom->user_id=Auth::id();
         $classroom->lesson_id=$lesson_id;
         $classroom->save();
+        return redirect()->route("top_page");
+    }
+
+    public function deleteTask(Request $request){
+        $task_id=$request->request->get("task_id");
+        $task = Classroom::where(["user_id"=>Auth::id(), "id"=>$task_id])->first();
+        $task->delete();
         return redirect()->route("top_page");
     }
 

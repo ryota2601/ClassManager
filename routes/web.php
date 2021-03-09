@@ -16,6 +16,7 @@ Route::get('/toppage', 'ToppageController@showTimetable')->name('top_page');
 Route::get('/', 'HomeController@index')->name('home');
 Route::post('/addLesson', 'ToppageController@registerLesson')->name('top_page_register_lesson');
 Route::post('/addTask', 'ToppageController@registerTask')->name('top_page_register_task');
+Route::post('/deleteTask', 'ToppageController@deleteTask')->name('top_page_delete_task');
 Route::get('/delete/{day_id}/{time_id}', 'ToppageController@lessonDelete')->name('lesson_delete');
 
 Auth::routes();

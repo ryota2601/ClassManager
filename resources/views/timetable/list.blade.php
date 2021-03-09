@@ -114,12 +114,15 @@
         </button>
       </div>
       <div class="modal-body">
+        <form action="/deleteTask" method="post">
+        @csrf
         <ul class="list-group" id="list-group">
         </ul>
+        </form>
       </div>
       <div class="modal-footer">
         <div><a href="" class="btn btn-primary" data-toggle="modal" data-target="#taskModal">課題追加</a></div>
-        <div><a href="" class="btn btn-danger" id="delete">削除</a></div>
+        <div><a href="" class="btn btn-danger" id="delete">授業を削除</a></div>
       </div>
     </div>
   </div>
@@ -181,19 +184,18 @@
     foreach($tasks as $key=>$task){
         echo $key . ':[' ;
         foreach($task as $element){
-          echo  '["' . $element[0] . '","' . $element[1] . '"],';
+          echo  '["' . $element[0] . '","' . $element[1] . '","' . $element[2] . '"],';
         }
         echo '],';
     }
     ?>
     }
     var task_html = "";
-    console.log(tasks[3]);
     if(typeof tasks[lesson_id] === 'undefined'){
     }else{
         console.log(lesson_id);
         tasks[lesson_id].forEach((data)=>{
-            task_html = task_html + '<li class="list-group-item"><div class="row"><div class="col-8">' + data[0] + '</div><div class="col-4">' + data[1] + '</div></div></li>';
+            task_html = task_html + '<li class="list-group-item"><div class="row"><div class="col-6">' + data[0] + '</div><div class="col-4">' + data[1] + '</div><button type="submit" class="col-2" name="task_id" id="task_id" value="' + data[2] + '">完了</button></div></li>';
         })
     }
     document.getElementById('delete').href = '/delete/' + day_raw + '/' + time;
