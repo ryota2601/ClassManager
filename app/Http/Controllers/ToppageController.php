@@ -10,7 +10,12 @@ use Illuminate\Support\Facades\Auth;
 
 class ToppageController extends Controller
 {
-    //
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function showTimetable()
     {
         $lessons_=Lesson::where('user_id', Auth::id())->get();
