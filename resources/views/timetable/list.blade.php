@@ -45,12 +45,15 @@
         </table>
     </div>
 </div>
+@endsection
 
+
+@section('javascript')
 <!-- formModal -->
 <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-        <form action="/toppage" method="post">
+        <form action="/addLesson" method="post">
             @csrf
         <div class="modal-header">
             <h5 class="modal-title" id="formModalLabel">授業を追加</h5>
@@ -132,29 +135,27 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form　action="" method="post">
-      <div class="modal-body">
-            <input type="hidden" value="" name="" id="input_lesson_id">
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">課題内容</label>
-                <textarea class="form-control" id="task" name="task" rows="1"></textarea>
-            </div>
-            <div class="form-group">
-                <label class="mb-2">提出期限</label><br>
-                <input type="date" id="deadline" name="deadline">
-            </div>
-      </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">追加</button>
-      </div>
+      <form action="/addTask" method="post">
+        @csrf
+        <div class="modal-body">
+                <input type="hidden" value="" name="task_lesson_id" id="task_lesson_id">
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">課題内容</label>
+                    <textarea class="form-control" id="task" name="task" rows="1"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="mb-2">提出期限</label><br>
+                    <input type="date" id="deadline" name="deadline">
+                </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">追加</button>
+        </div>
       </form>
     </div>
   </div>
 </div>
-@endsection
 
-
-@section('javascript')
 <script type="text/javascript">
     $('#formModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
@@ -197,12 +198,15 @@
     }
     document.getElementById('delete').href = '/delete/' + day_raw + '/' + time;
     document.getElementById('list-group').innerHTML = task_html;
-    document.getElementById('input_lesson_id').value = lesson_id;
+    document.getElementById('task_lesson_id').value = lesson_id;
     document.getElementById('detailModalLabel').innerHTML = name;
     document.getElementById('taskModalLabel').innerHTML = name + 'の課題を追加する';
     })
     $('#taskModal').on('show.bs.modal', function (event) {
         $('#detailModal').modal('hide');
+    })
+    $('#taskModal').on('hide.bs.modal', function (event) {
+        $('#detailModal').modal('show');
     })
 </script>
 @endsection

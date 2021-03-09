@@ -21,7 +21,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-     @yield("css")
+    @yield("css")
     <style type="text/css">
     body{
         background-color: #C4DFE6;
@@ -39,7 +39,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-mycolor shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark bg-mycolor shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/toppage') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -99,7 +99,7 @@
                 <p class="text-center">Copyright © MATSUMOTO RYOTA All Rights Reserved.</p>
             </div>
         </footer>
-        @yeld('javascript')
     </div>
+    @yield('javascript')
 </body>
 </html>

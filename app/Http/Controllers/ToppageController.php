@@ -61,11 +61,18 @@ class ToppageController extends Controller
         return redirect()->route("top_page");
     }
 
-    public function resisterTask(Request $request)
+    public function registerTask(Request $request)
     {
         $task=$request->request->get("task");
         $deadline=$request->request->get("deadline");
-        $classroom = Classroom::firstOrNew(["user_id"=>Auth::id()]);
+        $lesson_id=$request->request->get("task_lesson_id");
+        $classroom = new Classroom;
+        $classroom->deadline=$deadline;
+        $classroom->task=$task;
+        $classroom->user_id=Auth::id();
+        $classroom->lesson_id=$lesson_id;
+        $classroom->save();
+        return redirect()->route("top_page");
     }
 
     public function lessonDelete($day_id, $time_id)
