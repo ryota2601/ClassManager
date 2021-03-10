@@ -86,5 +86,5 @@ class ToppageController extends Controller
         $lesson = Lesson::where(["user_id"=>Auth::id(), "time_id"=>$time_id,  "day_id"=>$day_id])->first();
         $lesson->delete();
         return redirect()->route("top_page");
-    }
+    } 
 }

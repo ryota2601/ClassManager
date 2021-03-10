@@ -19,10 +19,12 @@ Route::post('/addTask', 'ToppageController@registerTask')->name('top_page_regist
 Route::post('/deleteTask', 'ToppageController@deleteTask')->name('top_page_delete_task');
 Route::get('/delete/{day_id}/{time_id}', 'ToppageController@lessonDelete')->name('lesson_delete');
 
+Route::get('/chat_room/{lesson_id}', 'ChatroomController@showChatroom')->name('chat_room');
+
 Auth::routes();
 
 
-Route::get('/chat_room/{lesson_id}', 'ToppageController@chat_room')->name('chat_room');
+
 
 
 
