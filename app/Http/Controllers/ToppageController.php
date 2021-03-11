@@ -49,28 +49,45 @@ class ToppageController extends Controller
         return view('timetable.list', compact('lessons', 'tasks', 'deadlines'));
     }
 
-    public function addForm()
-    {
-        return view('timetable.addForm');
-    }
-
     public function registerLesson(Request $request)
     {
         $time=$request->request->get("time");
         $name=$request->request->get("name");
         $day=$request->request->get("day");
-        $lesson = Lesson::firstOrNew(["user_id"=>Auth::id(), "time_id"=>$time,  "day_id"=>$day]);
-        $lesson->university_id=1;
-        $lesson->department_id=1;
-        $lesson->user_id=Auth::id();
-        $lesson->name=$name;
-        $lesson->day_id=$day;
-        $lesson->time_id=$time;
-        $lesson->start_time=new Carbon('2021-04-01');
-        $lesson->end_time=new Carbon('2021-07-31');
-        $lesson->save();
+        $lesson_exist = Lesson::where(["name"=>$name, 'time_id'=>$time, 'day_id'=>$day])->first();
+        if($lesson_exist === null){
+            $lesson = new Lesson;
+            $lesson->university_id=1;
+            $lesson->department_id=1;
+            $lesson->name=$name;
+            $lesson->day_id=$day;
+            $lesson->time_id=$time;
+            $lesson->start_time=new Carbon('2021-04-01');
+            $lesson->end_time=new Carbon('2021-07-31');
+            $lesson->save();
+            $pass = '/addNewLesson/' . $name . '/' . $day . '/' . $time;
+            return redirect($pass);
+        }else{
+            $lesson_id=$lesson_exist->id;
+            $mylesson = new Mylesson;
+            $mylesson->user_id=Auth::id();
+            $mylesson->lesson_id=$lesson_id;
+            $mylesson->save();
+            return redirect()->route("top_page");
+        }
+    }
+
+    public function registerNewLesson($name, $day, $time)
+    {
+        $target_lesson=Lesson::where(["name"=>$name, 'time_id'=>$time, 'day_id'=>$day])->first();
+        $lesson_id=$target_lesson->id;
+        $mylesson = new Mylesson;
+        $mylesson->user_id=Auth::id();
+        $mylesson->lesson_id=$lesson_id;
+        $mylesson->save();
         return redirect()->route("top_page");
     }
+    
 
     public function registerTask(Request $request)
     {
@@ -93,9 +110,9 @@ class ToppageController extends Controller
         return redirect()->route("top_page");
     }
 
-    public function lessonDelete($day_id, $time_id)
+    public function lessonDelete($lesson_id, $day_id, $time_id)
     {
-        $lesson = Lesson::where(["user_id"=>Auth::id(), "time_id"=>$time_id,  "day_id"=>$day_id])->first();
+        $lesson = Mylesson::where(["lesson_id"=>$lesson_id, 'user_id'=>Auth::id()])->first();
         $lesson->delete();
         return redirect()->route("top_page");
     } 

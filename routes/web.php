@@ -15,9 +15,12 @@
 Route::get('/toppage', 'ToppageController@showTimetable')->name('top_page');
 Route::get('/', 'HomeController@index')->name('home');
 Route::post('/addLesson', 'ToppageController@registerLesson')->name('top_page_register_lesson');
+Route::get('/addNewLesson/{name}/{day}/{time}', 'ToppageController@registerNewLesson')->name('top_page_register_newlesson');
 Route::post('/addTask', 'ToppageController@registerTask')->name('top_page_register_task');
 Route::post('/deleteTask', 'ToppageController@deleteTask')->name('top_page_delete_task');
-Route::get('/delete/{day_id}/{time_id}', 'ToppageController@lessonDelete')->name('lesson_delete');
+Route::get('/delete/{lesson_id}/{day_id}/{time_id}', 'ToppageController@lessonDelete')->name('lesson_delete');
+
+
 
 Route::get('/chat_room/{lesson_id}', 'ChatroomController@showChatroom')->name('chat_room');
 Route::post('/chat_room/{lesson_id}/addText', 'ChatroomController@addText')->name('chat_room_add_text');

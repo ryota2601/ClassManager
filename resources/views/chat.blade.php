@@ -150,7 +150,7 @@ img{ max-width:100%;}
               <h3>授業チャット一覧</h3>
           </div>
           <div class="inbox_chat">
-                @foreach($mylessons as $mylesson)
+                @foreach($lesson_list as $mylesson)
                     <div class="chat_list">
                         <div class="chat_people">
                             <div class="chat_ib">

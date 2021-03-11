@@ -50,7 +50,7 @@
 
 @section('javascript')
 <!-- formModal -->
-<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
+<div class="modal fade" data-keyboard="false" data-backdrop="static" id="formModal" tabindex="-1" role="dialog" aria-labelledby="formModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
         <form action="/addLesson" method="post">
@@ -104,7 +104,7 @@
 </div>
 
 <!-- detailModal -->
-<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
+<div class="modal fade" data-keyboard="false" data-backdrop="static" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -127,12 +127,12 @@
 </div>
 
 <!-- taskModal -->
-<div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="taskModalLabel" aria-hidden="true">
+<div class="modal fade" id="taskModal" data-keyboard="false" data-backdrop="static"　tabindex="-1" role="dialog" aria-labelledby="taskModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="taskModalLabel"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" onclick="location.href='/toppage'">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -177,7 +177,6 @@
     var day_raw = button.data('day');
     var time = button.data('time');
     var lesson_id = button.data('lesson');
-    console.log(lesson_id);
     var name = button.data('name');
     var tasks = {
     <?php
@@ -197,7 +196,7 @@
             task_html = task_html + '<li class="list-group-item"><div class="row"><div class="col-6">' + data[0] + '</div><div class="col-4">' + data[1] + '</div><button type="submit" class="col-2" name="task_id" id="task_id" value="' + data[2] + '">完了</button></div></li>';
         })
     }
-    var detail_modal_footer = '<div><a href="/chat_room/' + lesson_id + '" class="btn btn-success">チャット</a></div><div><a href="" class="btn btn-primary" data-toggle="modal" data-target="#taskModal">課題追加</a></div><div><a href="' + '/delete/' + day_raw + '/' + time + '" class="btn btn-danger" id="delete">授業を削除</a></div>'
+    var detail_modal_footer = '<div><a href="/chat_room/' + lesson_id + '" class="btn btn-success">チャット</a></div><div><a href="" class="btn btn-primary" data-toggle="modal" data-target="#taskModal">課題追加</a></div><div><a href="' + '/delete/' + lesson_id + '/' + day_raw + '/' + time + '" class="btn btn-danger" id="delete">授業を削除</a></div>'
     document.getElementById('list-group').innerHTML = task_html;
     document.getElementById('task_lesson_id').value = lesson_id;
     document.getElementById('detailModalLabel').innerHTML = name;
