@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Lesson;
+use App\Models\Mylesson;
 use App\Models\Classroom;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,14 +19,25 @@ class ToppageController extends Controller
     
     public function showTimetable()
     {
-        $lessons_=Lesson::where('user_id', Auth::id())->get();
+        $mylessons=Mylesson::where('user_id', Auth::id())->get();
+        $mylesson_ids=array();
+        foreach($mylessons as $mylesson){
+            $mylesson_ids[] = $mylesson->lesson_id;
+        }
+
+        $lessons__ = array();
+        foreach($mylesson_ids as $mylesson_id){
+            $lessons__[]=Lesson::where('id', $mylesson_id)->get();
+        }
 
         $lessons=array();
 
-        foreach($lessons_ as $lesson){
-            $lessons[$lesson->day_id][$lesson->time_id] = $lesson;
+        foreach($lessons__ as $lesson_){
+            foreach($lesson_ as $lesson){
+                $lessons[$lesson->day_id][$lesson->time_id] = $lesson;
+            }
         }
-
+        
         $details_ = Classroom::where('user_id', Auth::id())->get();
         $tasks=array();
         $deadlines=array();
