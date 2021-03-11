@@ -20,6 +20,8 @@ Route::post('/deleteTask', 'ToppageController@deleteTask')->name('top_page_delet
 Route::get('/delete/{day_id}/{time_id}', 'ToppageController@lessonDelete')->name('lesson_delete');
 
 Route::get('/chat_room/{lesson_id}', 'ChatroomController@showChatroom')->name('chat_room');
+Route::post('/chat_room/{lesson_id}/addText', 'ChatroomController@addText')->name('chat_room_add_text');
+
 
 Auth::routes();
 

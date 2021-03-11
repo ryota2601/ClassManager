@@ -121,8 +121,6 @@
         </form>
       </div>
       <div class="modal-footer" id="modal-footer">
-        <div><a href="" class="btn btn-primary" data-toggle="modal" data-target="#taskModal">課題追加</a></div>
-        <div><a href="" class="btn btn-danger" id="delete">授業を削除</a></div>
       </div>
     </div>
   </div>
@@ -173,11 +171,13 @@
     document.getElementById('day').options[day_raw].selected = true;
     document.getElementById('time').options[time - 1].selected = true;
     })
+
     $('#detailModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);
     var day_raw = button.data('day');
     var time = button.data('time');
     var lesson_id = button.data('lesson');
+    console.log(lesson_id);
     var name = button.data('name');
     var tasks = {
     <?php
@@ -193,19 +193,18 @@
     var task_html = "";
     if(typeof tasks[lesson_id] === 'undefined'){
     }else{
-        console.log(lesson_id);
         tasks[lesson_id].forEach((data)=>{
             task_html = task_html + '<li class="list-group-item"><div class="row"><div class="col-6">' + data[0] + '</div><div class="col-4">' + data[1] + '</div><button type="submit" class="col-2" name="task_id" id="task_id" value="' + data[2] + '">完了</button></div></li>';
         })
     }
-    var detail_modal_footer = '<div><a href="/chat_room/' + lesson_id + '" class="btn btn-success">チャット</a></div><div><a href="" class="btn btn-primary" data-toggle="modal" data-target="#taskModal">課題追加</a></div><div><a href="" class="btn btn-danger" id="delete">授業を削除</a></div>'
-    document.getElementById('delete').href = '/delete/' + day_raw + '/' + time;
+    var detail_modal_footer = '<div><a href="/chat_room/' + lesson_id + '" class="btn btn-success">チャット</a></div><div><a href="" class="btn btn-primary" data-toggle="modal" data-target="#taskModal">課題追加</a></div><div><a href="' + '/delete/' + day_raw + '/' + time + '" class="btn btn-danger" id="delete">授業を削除</a></div>'
     document.getElementById('list-group').innerHTML = task_html;
     document.getElementById('task_lesson_id').value = lesson_id;
     document.getElementById('detailModalLabel').innerHTML = name;
     document.getElementById('taskModalLabel').innerHTML = name + 'の課題を追加する';
     document.getElementById('modal-footer').innerHTML = detail_modal_footer;
     })
+
     $('#taskModal').on('show.bs.modal', function (event) {
         $('#detailModal').modal('hide');
     })
