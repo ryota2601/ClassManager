@@ -26,11 +26,12 @@ Route::get('/chat_room/{lesson_id}', 'ChatroomController@showChatroom')->name('c
 Route::post('/chat_room/{lesson_id}/addText', 'ChatroomController@addText')->name('chat_room_add_text');
 
 
-Auth::routes();
 
-
-
-
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('register', 'Auth\RegisterController@register');
 
 
 
