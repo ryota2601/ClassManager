@@ -166,13 +166,13 @@ img{ max-width:100%;}
             <?php
             foreach($chats as $chat){
                 if($chat[0] == Auth::id()){
-                    echo '<div class="outgoing_msg">
+                    echo '<div class="outgoing_msg" id="'. $chat[3].'">
                             <div class="sent_msg">
                             <p>' . $chat[1] . '</p>
                             </div>
                           </div>';
                 }else{
-                    echo '<div class="incoming_msg">
+                    echo '<div class="incoming_msg" id="'. $chat[3].'">
                             <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
                             <div class="received_msg">
                             <p>' . $chat[1] . '</p>
@@ -193,7 +193,21 @@ img{ max-width:100%;}
           </div>
         </div>
       </div>
-      
+
     </div>
 </div>
+@endsection
+
+@section("javascript")
+    <script type="text/javascript">
+
+        setInterval()
+        let chat_id=$('.msg_history:last-child').getAttribute('id');
+        $.ajax({
+            type:'GET',
+            url:'/chat_room/{{$lesson_id}}/getMessage/'+chat_id,
+        }).then(function(data){
+            console.log(data);
+        });
+    </script>å
 @endsection

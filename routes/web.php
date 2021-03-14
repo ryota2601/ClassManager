@@ -24,6 +24,7 @@ Route::get('/delete/{lesson_id}/{day_id}/{time_id}', 'ToppageController@lessonDe
 
 Route::get('/chat_room/{lesson_id}', 'ChatroomController@showChatroom')->name('chat_room');
 Route::post('/chat_room/{lesson_id}/addText', 'ChatroomController@addText')->name('chat_room_add_text');
+Route::get('/chat_room/{lesson_id}/getMessage/{chat_id}', 'ChatroomController@getMessage')->name('chat_room_get_message');
 
 
 
