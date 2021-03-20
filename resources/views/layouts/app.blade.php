@@ -96,7 +96,7 @@
 
         <footer class="footer">
             <div class="container">
-                <p class="text-center">Copyright © MATSUMOTO RYOTA All Rights Reserved.</p>
+                <p class="text-center">Copyright ©RYOTA MATSUMOTO All Rights Reserved.</p>
             </div>
         </footer>
     </div>
