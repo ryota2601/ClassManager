@@ -1,5 +1,17 @@
 @extends('layouts.app')
 
+@section('css')
+    <style type="text/css">
+    .card{
+        border-radius: 2rem 0rem 2rem 0rem;
+    }
+    .card-header:first-child{
+        border-radius: 2rem 0rem 0rem 0rem;
+    }
+    </style>
+@endsection
+
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

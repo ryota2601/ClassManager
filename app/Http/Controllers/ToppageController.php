@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ChatRoom;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Lesson;
@@ -16,7 +17,6 @@ class ToppageController extends Controller
     {
         $this->middleware('auth');
     }
-    
     public function showTimetable()
     {
         $mylessons=Mylesson::where('user_id', Auth::id())->get();
@@ -115,5 +115,14 @@ class ToppageController extends Controller
         $lesson = Mylesson::where(["lesson_id"=>$lesson_id, 'user_id'=>Auth::id()])->first();
         $lesson->delete();
         return redirect()->route("top_page");
+
     } 
+
+    public function chat_room($lesson_id){
+
+        $Chats=ChatRoom::where('lesson_id',$lesson_id)->orderBy('created_date', 'asc')->get();
+
+        return view('chatroom/index',compact($Chats));
+    }
+
 }

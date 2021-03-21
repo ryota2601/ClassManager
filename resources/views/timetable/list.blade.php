@@ -136,6 +136,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+ 
       <form action="/addTask" method="post">
         @csrf
         <div class="modal-body">
@@ -152,11 +153,33 @@
         <div class="modal-footer">
             <button type="submit" class="btn btn-primary">追加</button>
         </div>
+
+      <form　action="" method="post">
+      <div class="modal-body">
+            <input type="hidden" value="" name="" id="input_lesson_id">
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">課題内容</label>
+                <textarea class="form-control" id="task" name="task" rows="1"></textarea>
+            </div>
+            <div class="form-group">
+                <label class="mb-2">提出期限</label><br>
+                <input type="date" id="deadline" name="deadline">
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">追加</button>
+      </div>
+
       </form>
     </div>
   </div>
 </div>
+@endsection
+ 
 
+
+@section('javascript')
+ 
 <script type="text/javascript">
     $('#formModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);

@@ -18,9 +18,12 @@
      <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/datepicker.css') }}" rel="stylesheet">
     @yield("css")
     <style type="text/css">
     body{
@@ -94,11 +97,21 @@
             @yield('content')
         </main>
 
+
         <footer class="footer">
             <div class="container">
                 <p class="text-center">Copyright ©RYOTA MATSUMOTO All Rights Reserved.</p>
             </div>
         </footer>
+
+
+    <footer class="footer">
+      <div class="container">
+        <p class="text-center">Copyright © MATSUMOTO RYOTA All Rights Reserved.</p>
+      </div>
+    </footer>
+
+        @yield('javascript')
     </div>
     @yield('javascript')
 </body>
