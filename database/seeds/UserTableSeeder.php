@@ -12,15 +12,27 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        $dataset =[
-            "id"=>1,
-            "name"=>"松本僚太",
-            "university_id"=>1,
-            "department_id"=>1,
-            "email"=>'t@t.com',
-            "password"=>bcrypt('00000000'),
+        $dataSet = [
+            [
+                "id"=>1,
+                "name"=>"松本僚太",
+                "university_id"=>1,
+                "department_id"=>1,
+                "email"=>'t1@t.com',
+                "password"=>bcrypt('00000000'),
+            ],
+            [
+                "id"=>2,
+                "name"=>"田中太郎",
+                "university_id"=>1,
+                "department_id"=>1,
+                "email"=>'t2@t.com',
+                "password"=>bcrypt('00000000'),
+            ],
         ];
 
-        User::create($dataset);
+        foreach ($dataSet as $data) {
+            User::create($data);
+        }
     }
 }

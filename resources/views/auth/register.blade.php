@@ -52,6 +52,23 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="university" class="col-md-4 col-form-label text-md-right">{{ __('大学名') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="university" type="text" class="form-control" name="university">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="department" class="col-md-4 col-form-label text-md-right">{{ __('学部名') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="department" type="text" class="form-control" name="department">
+                            </div>
+                        </div>
+
+                        
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">

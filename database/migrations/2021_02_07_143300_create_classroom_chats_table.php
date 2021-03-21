@@ -15,15 +15,15 @@ class CreateClassroomChatsTable extends Migration
     {
         Schema::create('classroom_chats', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('class_room_id');
+            $table->integer('lesson_id');
             $table->integer('user_id');
             $table->text('text');
-            $table->char('file', 255);
+            $table->char('file', 255)->nullable();
             $table->timestamps();
 
-            $table->foreign('class_room_id')
+            $table->foreign('lesson_id')
                     ->references('id')
-                    ->on('classrooms')
+                    ->on('lessons')
                     ->onDelete('cascade');
                     
             $table->foreign('user_id')

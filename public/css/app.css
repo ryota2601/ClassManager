@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+
 
 @font-face {
     font-family: "MyFont";
@@ -9,9 +9,14 @@
 /*!
  * Bootstrap v4.6.0 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
- * Copyright 2011-2021 Twitter, Inc.
+ * Copyright 2011-2021 Twitter, Inc
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+
+ @font-face {
+    font-family: "MyFont";
+    src: url("../font/RocknRollOne.ttf");
+}
 
 :root {
   --blue: #3490dc;
@@ -74,6 +79,8 @@ section {
 
 body {
   margin: 0;
+
+  font-family: "MyFont", sans-serif;
   font-family: 'RocknRoll One', sans-serif;
   font-size: 0.9rem;
   font-weight: 400;
@@ -4933,11 +4940,11 @@ input[type=button].btn-block {
 
 .navbar-dark .navbar-brand:hover,
 .navbar-dark .navbar-brand:focus {
-  color: #fff;
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .navbar-dark .navbar-nav .nav-link {
-  color: rgba(255, 255, 255, 0.5);
+  color: white;
 }
 
 .navbar-dark .navbar-nav .nav-link:hover,
