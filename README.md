@@ -19,7 +19,6 @@ ClassManager has 3 features.
 - Ajax
 - Javascript
 - Heroku
-These are used in ClassManager
 
 # Usage
 - Access https://classmanager2601.herokuapp.com/
