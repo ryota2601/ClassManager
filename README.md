@@ -6,9 +6,9 @@ if you know how to use ClassManager, you can watch DEMO from this Youtube link (
 
 # Features
 ClassManager has 3 features.
- • You can make timetable based on classes in your university.
- • You can manage deadline of your assignments.
- • You can chat with classmates in each class form your timetables and exchange information with them.
+- You can make timetable based on classes in your university.
+- You can manage deadline of your assignments.
+- You can chat with classmates in each class form your timetables and exchange information with them.
 
 # Dependency
 - PHP (>= 7.0)
